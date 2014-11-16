@@ -13,7 +13,8 @@ import java.time.LocalDateTime;
 public abstract class LibraryItem {
     private boolean isBorrowed = false;
     private boolean isReserved = false;
-    private User user;
+    private User userBorrowed;
+    private User userReserved;
     private String title;
     private String genre;
     private int year;
@@ -22,10 +23,10 @@ public abstract class LibraryItem {
     private LocalDateTime dueDate;
     
     public abstract String getItemInformation();
-    public abstract void borrowItem(User user, boolean status);
-    
+    public abstract void borrowItem(User user);
+        
     /**
-     * 
+     * Constructor
      * @param title
      * @param genre
      * @param isbn
@@ -36,78 +37,152 @@ public abstract class LibraryItem {
         this.genre = genre;
         this.isbn = isbn;
         this.year = year;
-        this.user = null;
+        this.userBorrowed = null;
+        this.userReserved = null;
     }
     
-    protected void setUser(User user) {
-        this.user = user;
+    /**
+     * Mark item reserved by user
+     * @param user 
+     */
+    public void reserveItem(User user) {
+        this.userReserved = user;
+        this.isReserved = true;
     }
     
-    protected void setBorrowDate(LocalDateTime loanDate) {
-        this.borrowDate = loanDate;
+    /**
+     *
+     * @param user 
+     */
+    protected void setUserBorrowed(User user) {
+        this.userBorrowed = user;
     }
     
-    protected void setDueDate(LocalDateTime dueDate) {
-        this.dueDate = dueDate;
-    }
-    
+    /**
+     * 
+     * @param status 
+     */
     protected void setBorrowStatus(boolean status) {
         this.isBorrowed = status;
     }
     
+    /**
+     * 
+     * @param loanDate 
+     */
+    protected void setBorrowDate(LocalDateTime loanDate) {
+        this.borrowDate = loanDate;
+    }
+    
+    /**
+     * 
+     * @param dueDate 
+     */
+    protected void setDueDate(LocalDateTime dueDate) {
+        this.dueDate = dueDate;
+    }
+    
+    /**
+     * 
+     * @return 
+     */
     public LocalDateTime getDueDate() {
         return dueDate;
     }
     
+    /**
+     * 
+     */
     public void returnItem() {
-        this.user = null;
+        this.userBorrowed = null;
         this.isBorrowed = false;
     }
     
-    public User getUser() {
-        return user;
+    /**
+     * 
+     * @return 
+     */
+    protected User getUserBorrowed() {
+        return userBorrowed;
     }
     
-    public LocalDateTime getBorrowDate() {
+    /**
+     * 
+     * @return 
+     */
+    protected LocalDateTime getBorrowDate() {
         return borrowDate;
     }
     
-    public boolean getBorrowStatus() {
+    /**
+     * 
+     * @return 
+     */
+    protected boolean getBorrowStatus() {
         return isBorrowed;
     }
     
-    public String getTitle() {
+    /**
+     * 
+     * @return 
+     */
+    protected String getTitle() {
         return title;
     }
-
-    public void setTitle(String title) {
+    
+    /**
+     * 
+     * @param title 
+     */
+    protected void setTitle(String title) {
         this.title = title;
     }
-
-    public String getGenre() {
+    
+    /**
+     * 
+     * @return 
+     */
+    protected String getGenre() {
         return genre;
     }
-
-    public void setGenre(String genre) {
+    
+    /**
+     * 
+     * @param genre 
+     */
+    protected void setGenre(String genre) {
         this.genre = genre;
     }
-
-    public int getYear() {
+    
+    /**
+     * 
+     * @return 
+     */
+    protected int getYear() {
         return year;
     }
-
-    public void setYear(int year) {
+    
+    /**
+     * 
+     * @param year 
+     */
+    protected void setYear(int year) {
         this.year = year;
     }
-
-    public int getIsbn() {
+    
+    /**
+     * 
+     * @return 
+     */
+    protected int getIsbn() {
         return isbn;
     }
-
-    public void setIsbn(int isbn) {
+    
+    /**
+     * 
+     * @param isbn 
+     */
+    protected void setIsbn(int isbn) {
         this.isbn = isbn;
     }
-
-    
-
 }

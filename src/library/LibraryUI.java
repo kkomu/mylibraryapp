@@ -119,7 +119,15 @@ public class LibraryUI {
                 item = library.borrowItem(user, foundItems.get(borrowSelection).getIsbn());
 
                 if (item == null) {
-                    System.out.println("Teos on jo lainassa!");
+                    System.out.print("Teos on jo lainassa! Haluatko varata sen [k/e]: ");
+                    String input;
+                    do {
+                        input = scan.nextLine();
+                    } while ( !input.toLowerCase().matches("k") && !input.toLowerCase().matches("e") );
+                    if (input.matches("k")) {
+                        library.reserveItem(user, foundItems.get(borrowSelection).getIsbn() );
+                    }
+                    
                 }
                 else {
                 System.out.print("Lainattiin: ");
@@ -339,7 +347,7 @@ public class LibraryUI {
         for(LibraryItem i: allItems) {
             System.out.printf("%s",i.getItemInformation());
             if (i.getBorrowStatus()) {
-                System.out.printf(" Lainassa: %s",i.getUser().getUserInfo());
+                System.out.printf(" Lainassa: %s",i.getUserBorrowed().getUserInfo());
             }
             System.out.println();
         }

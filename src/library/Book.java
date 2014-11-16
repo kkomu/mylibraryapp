@@ -53,11 +53,11 @@ public class Book extends LibraryItem {
      * @param status 
      */
     @Override
-    public void borrowItem(User user, boolean status)
+    public void borrowItem(User user)
     {
         LocalDateTime now = LocalDateTime.now();
         super.setBorrowStatus(true);
-        super.setUser(user);
+        super.setUserBorrowed(user);
         super.setBorrowDate(now);
         super.setDueDate(now.plusDays(borrowTime));
     }

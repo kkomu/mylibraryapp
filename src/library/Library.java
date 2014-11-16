@@ -55,13 +55,28 @@ public class Library {
         for(LibraryItem item: collection) {
             if ( isbn == item.getIsbn() ) {
                 if (!item.getBorrowStatus()) {
-                    item.borrowItem(user,true);
+                    item.borrowItem(user);
                     foundItem = item;
                 }
             }
         }
         return foundItem;
     }
+    
+    public void reserveItem(User user, int isbn) {
+        //LibraryItem foundItem = null;
+        //System.out.printf("ISBN: %d\n",isbn);
+        for(LibraryItem item: collection) {
+            if ( isbn == item.getIsbn() ) {
+                if (!item.getBorrowStatus()) {
+                    item.reserveItem(user);
+          //          foundItem = item;
+                }
+            }
+        }
+        //return foundItem;
+    }
+    
     
     /**
      * Searches from collection by keyword and returns ArrayList
@@ -87,7 +102,7 @@ public class Library {
         List<LibraryItem> foundItems = new ArrayList<>();
 
         for(LibraryItem item: collection) {
-            if ( item.getUser() == user ) {
+            if ( item.getUserBorrowed() == user ) {
                 foundItems.add(item);
             }
         }
